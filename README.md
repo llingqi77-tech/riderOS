@@ -6,7 +6,7 @@
 
 推送至 GitHub 后自动部署，访问地址：
 
-`https://<你的用户名>.github.io/riderOS/`
+`https://llingqi77-tech.github.io/riderOS/`
 
 ## 本地开发
 
@@ -19,9 +19,15 @@ npm run dev
 
 ## 部署到 GitHub Pages
 
-1. 将代码推送到 GitHub 仓库（`main` 分支）
-2. 仓库 Settings → Pages → Build and deployment → Source 选择 **GitHub Actions**
-3. 推送后 Actions 自动构建部署，约 1–2 分钟可访问
+在线地址：**https://llingqi77-tech.github.io/riderOS/**
+
+1. 推送至 `main` 分支后，Actions 自动构建并推送到 `gh-pages` 分支
+2. 仓库 **Settings → Pages → Build and deployment**：
+   - Source 选 **Deploy from a branch**
+   - Branch 选 **`gh-pages`** / **`/ (root)`**
+3. 等待 1–2 分钟即可访问
+
+> 注意：不要选 `main` 分支部署，否则会加载未构建的源码导致白屏。
 
 ## 技术栈
 
