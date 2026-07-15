@@ -59,27 +59,31 @@ export default function RiderDetailPage() {
       </button>
 
       {/* Header */}
-      <section className="mb-5 flex items-center gap-4 rounded-card bg-white p-5 shadow-card">
-        <img src={rider.avatar} alt="" className="h-16 w-16 rounded-full object-cover" />
+      <section className="hero-lavender mb-5 flex items-center gap-4">
+        <img
+          src={rider.avatar}
+          alt=""
+          className="h-16 w-16 rounded-full border-2 border-black/20 object-cover"
+        />
         <div className="flex-1">
           <div className="flex items-center gap-3">
             <h1 className="text-xl font-bold">{rider.name}</h1>
             <RiskLevelBadge level={rider.riskLevel} large />
-            <span className="num-big text-lg" style={{ color: RISK_META[rider.riskLevel].color }}>
+            <span className="num-big text-lg text-white/90">
               {Math.round(rider.riskProbability * 100)}%
             </span>
           </div>
-          <p className="mt-1 text-sm text-neutral-500">
+          <p className="mt-1 text-sm text-[rgba(41,41,41,0.8)]">
             {rider.riderId} · {rider.city} · {rider.financeCompany} · Credit score{' '}
             <span className="font-semibold text-neutral-900">{rider.creditScore}</span>
           </p>
         </div>
-        <button className="flex items-center gap-1.5 rounded-btn border border-neutral-200 px-4 py-2 text-sm font-medium text-neutral-500">
+        <button className="flex items-center gap-1.5 rounded-btn border border-white/40 bg-white/20 px-4 py-2 text-sm font-medium text-white">
           <FileDown size={15} /> Export PDF
         </button>
         <button
           onClick={() => setModal(true)}
-          className="rounded-btn bg-info px-5 py-2 text-sm font-semibold text-white"
+          className="rounded-btn bg-accent px-5 py-2 text-sm font-semibold text-neutral-900"
         >
           Intervene now
         </button>
@@ -102,7 +106,7 @@ export default function RiderDetailPage() {
             className={cn(
               'border-b-2 px-4 py-2.5 text-sm font-medium transition',
               tab === t
-                ? 'border-info text-info'
+                ? 'border-brand text-brand-dark'
                 : 'border-transparent text-neutral-500 hover:text-neutral-900',
             )}
           >
@@ -121,7 +125,7 @@ export default function RiderDetailPage() {
                 <XAxis dataKey="label" tick={{ fontSize: 10, fill: '#6B7280' }} axisLine={false} tickLine={false} interval={4} />
                 <YAxis tick={{ fontSize: 11, fill: '#6B7280' }} axisLine={false} tickLine={false} width={40} />
                 <Tooltip formatter={(v: number) => formatNGN(v)} contentStyle={{ fontSize: 12, borderRadius: 8 }} />
-                <Line type="monotone" dataKey="net" name="Net income" stroke="#10B981" strokeWidth={2} dot={false} />
+                <Line type="monotone" dataKey="net" name="Net income" stroke="#9B8AFB" strokeWidth={2} dot={false} />
               </LineChart>
             </ResponsiveContainer>
           </section>
@@ -181,13 +185,13 @@ export default function RiderDetailPage() {
               <div key={r.factor}>
                 <div className="mb-1 flex items-center justify-between text-sm">
                   <span className="font-medium">{r.factor}</span>
-                  <span className="num-big text-info">
+                  <span className="num-big text-brand-dark">
                     {formatPercent(r.contribution)}
                   </span>
                 </div>
                 <div className="h-2.5 overflow-hidden rounded-full bg-neutral-100">
                   <div
-                    className="h-full rounded-full bg-info"
+                    className="h-full rounded-full bg-brand"
                     style={{ width: `${r.contribution * 100}%` }}
                   />
                 </div>
@@ -205,9 +209,9 @@ export default function RiderDetailPage() {
 
 function MiniKpi({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-card bg-white p-4 shadow-card">
-      <p className="text-xs text-neutral-500">{label}</p>
-      <p className="num-big mt-1.5 text-2xl text-neutral-900">{value}</p>
+    <div className="hero-lavender !p-4">
+      <p className="text-xs text-[rgba(41,41,41,0.8)]">{label}</p>
+      <p className="num-big mt-1.5 text-2xl">{value}</p>
     </div>
   )
 }

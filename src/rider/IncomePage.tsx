@@ -22,7 +22,7 @@ const RANGES: { key: Range; label: string }[] = [
   { key: 'month', label: 'Month' },
 ]
 
-const PIE_COLORS = ['#10B981', '#3B82F6', '#F59E0B', '#FB923C', '#6B7280']
+const PIE_COLORS = ['#9B8AFB', '#6E5FD4', '#F59E0B', '#FB923C', '#6B7280']
 
 export default function IncomePage() {
   const data = useRiderStore((s) => s.cityData())
@@ -52,9 +52,9 @@ export default function IncomePage() {
         ))}
       </div>
 
-      <section className="rounded-card bg-white p-5 shadow-card">
-        <p className="text-sm text-neutral-500">Current net income</p>
-        <p className="num-big mt-1 text-[40px] leading-none text-neutral-900">
+      <section className="hero-lavender">
+        <p className="text-sm text-[rgba(41,41,41,0.8)]">Current net income</p>
+        <p className="num-big mt-1 text-[40px] leading-none">
           {fmt(summary.net)}
         </p>
         <div className="mt-3 grid grid-cols-3 gap-2 text-center">
@@ -62,21 +62,21 @@ export default function IncomePage() {
             <p
               className={cn(
                 'flex items-center justify-center gap-0.5 text-sm font-semibold',
-                delta >= 0 ? 'text-brand' : 'text-danger',
+                delta >= 0 ? 'text-white' : 'text-danger',
               )}
             >
               {delta >= 0 ? <ArrowUpRight size={14} /> : <ArrowDownRight size={14} />}
               {fmt(Math.abs(delta))}
             </p>
-            <p className="text-[11px] text-neutral-500">vs prior period</p>
+            <p className="text-[11px] text-white/85">vs prior period</p>
           </div>
           <div>
-            <p className="text-sm font-semibold text-neutral-900">{targetPct}%</p>
-            <p className="text-[11px] text-neutral-500">Target progress</p>
+            <p className="text-sm font-semibold text-white">{targetPct}%</p>
+            <p className="text-[11px] text-white/85">Target progress</p>
           </div>
           <div>
-            <p className="text-sm font-semibold text-neutral-900">{fmt(summary.best)}</p>
-            <p className="text-[11px] text-neutral-500">All-time best</p>
+            <p className="text-sm font-semibold text-white">{fmt(summary.best)}</p>
+            <p className="text-[11px] text-white/85">All-time best</p>
           </div>
         </div>
       </section>
@@ -87,8 +87,8 @@ export default function IncomePage() {
           <AreaChart data={trend} margin={{ top: 5, right: 5, left: 5, bottom: 0 }}>
             <defs>
               <linearGradient id="inc" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#10B981" stopOpacity={0.35} />
-                <stop offset="100%" stopColor="#10B981" stopOpacity={0} />
+                <stop offset="0%" stopColor="#9B8AFB" stopOpacity={0.35} />
+                <stop offset="100%" stopColor="#9B8AFB" stopOpacity={0} />
               </linearGradient>
               <linearGradient id="exp" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor="#EF4444" stopOpacity={0.25} />
@@ -109,7 +109,7 @@ export default function IncomePage() {
               type="monotone"
               dataKey="income"
               name="Income"
-              stroke="#10B981"
+              stroke="#9B8AFB"
               strokeWidth={2}
               fill="url(#inc)"
             />

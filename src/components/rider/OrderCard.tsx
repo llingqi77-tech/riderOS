@@ -74,7 +74,7 @@ export default function OrderCard({
         </button>
         <button
           onClick={onAccept}
-          className="flex-[2] rounded-btn bg-brand py-1.5 text-sm font-semibold text-white active:scale-[0.99]"
+          className="flex-[2] rounded-btn bg-accent py-1.5 text-sm font-semibold text-neutral-900 active:scale-[0.99]"
         >
           Accept
         </button>

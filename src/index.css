@@ -15,8 +15,8 @@ body,
 body {
   margin: 0;
   font-family: 'Inter', 'Noto Sans', system-ui, sans-serif;
-  background: #e9edf2;
-  color: #1f2937;
+  background: #ebe7f5;
+  color: #1a0b2e;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -26,6 +26,14 @@ body {
   }
   .card {
     @apply rounded-card bg-white shadow-card;
+  }
+  .hero-lavender {
+    @apply rounded-card p-5 text-white shadow-card;
+    background: linear-gradient(
+      90deg,
+      rgba(159, 137, 210, 1) 36%,
+      rgba(191, 165, 230, 1) 64%
+    );
   }
   .no-scrollbar::-webkit-scrollbar {
     display: none;

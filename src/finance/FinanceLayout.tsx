@@ -25,7 +25,7 @@ export default function FinanceLayout() {
       {/* Sidebar */}
       <aside className="fixed inset-y-0 left-0 flex w-60 flex-col border-r border-neutral-200 bg-white">
         <div className="flex items-center gap-2 px-5 py-5">
-          <span className="flex h-9 w-9 items-center justify-center rounded-btn bg-brand text-white">
+          <span className="flex h-9 w-9 items-center justify-center rounded-btn text-white bg-[linear-gradient(90deg,rgba(159,137,210,1)_36%,rgba(191,165,230,1)_64%)]">
             <Sparkles size={18} />
           </span>
           <div>
@@ -43,7 +43,7 @@ export default function FinanceLayout() {
                 cn(
                   'flex items-center gap-3 rounded-btn px-3 py-2.5 text-sm font-medium transition',
                   isActive
-                    ? 'bg-info/10 text-info'
+                    ? 'bg-[rgba(159,137,210,0.15)] text-[rgba(41,41,41,0.9)]'
                     : 'text-neutral-500 hover:bg-neutral-50',
                 )
               }
@@ -58,7 +58,9 @@ export default function FinanceLayout() {
             className={({ isActive }) =>
               cn(
                 'flex items-center gap-3 rounded-btn px-3 py-2.5 text-sm font-medium transition',
-                isActive ? 'bg-info/10 text-info' : 'text-neutral-500 hover:bg-neutral-50',
+                isActive
+                  ? 'bg-[rgba(159,137,210,0.15)] text-[rgba(41,41,41,0.9)]'
+                  : 'text-neutral-500 hover:bg-neutral-50',
               )
             }
           >
@@ -82,7 +84,7 @@ export default function FinanceLayout() {
             />
             <input
               placeholder="Search rider ID / name"
-              className="w-full rounded-btn border border-neutral-200 bg-canvas py-2 pl-9 pr-3 text-sm outline-none focus:border-info"
+              className="w-full rounded-btn border border-neutral-200 bg-canvas py-2 pl-9 pr-3 text-sm outline-none focus:border-brand"
             />
           </div>
           <button className="relative rounded-full p-2 hover:bg-neutral-50">

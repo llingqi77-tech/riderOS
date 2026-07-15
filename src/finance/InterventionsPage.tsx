@@ -57,9 +57,9 @@ export default function InterventionsPage() {
             <YAxis tick={{ fontSize: 11, fill: '#6B7280' }} axisLine={false} tickLine={false} width={32} unit="%" />
             <Tooltip formatter={(v: number) => `${v}%`} contentStyle={{ fontSize: 12, borderRadius: 8 }} />
             <Legend wrapperStyle={{ fontSize: 12 }} />
-            <Bar dataKey="d7" name="7d" fill="#93C5FD" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="d14" name="14d" fill="#3B82F6" radius={[4, 4, 0, 0]} />
-            <Bar dataKey="d30" name="30d" fill="#1D4ED8" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="d7" name="7d" fill="#B8ADFC" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="d14" name="14d" fill="#9B8AFB" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="d30" name="30d" fill="#6E5FD4" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </section>
@@ -77,7 +77,7 @@ export default function InterventionsPage() {
                 key={it.interventionId}
                 className="flex items-center gap-4 rounded-btn border border-neutral-200 p-3"
               >
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-info/10 text-info">
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand/10 text-brand-dark">
                   <Icon size={16} />
                 </span>
                 <div className="w-36 shrink-0">

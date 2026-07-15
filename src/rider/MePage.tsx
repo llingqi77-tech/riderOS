@@ -24,19 +24,19 @@ export default function MePage() {
 
   return (
     <div className="space-y-4">
-      <section className="rounded-card bg-gradient-to-br from-brand to-brand-dark p-5 text-white shadow-card">
+      <section className="hero-lavender">
         <div className="flex items-center gap-3">
           <img
             src={rider.avatar}
             alt=""
-            className="h-14 w-14 rounded-full border-2 border-white/50 object-cover"
+            className="h-14 w-14 rounded-full border-2 border-black/20 object-cover"
           />
           <div>
             <p className="text-lg font-bold">{rider.name}</p>
-            <p className="text-xs text-white/80">
+            <p className="text-xs text-[rgba(41,41,41,0.8)]">
               {rider.riderId} · {rider.financeCompany}
             </p>
-            <p className="mt-0.5 flex items-center gap-1 text-xs text-white/70">
+            <p className="mt-0.5 flex items-center gap-1 text-xs text-[rgba(41,41,41,0.7)]">
               <MapPin size={11} /> Current city: {data.name}
             </p>
           </div>
@@ -44,19 +44,19 @@ export default function MePage() {
         <div className="mt-4 grid grid-cols-3 gap-2 text-center">
           <div>
             <p className="num-big text-xl">{rider.creditScore}</p>
-            <p className="text-[11px] text-white/80">Credit score</p>
+            <p className="text-[11px] text-[rgba(41,41,41,0.8)]">Credit score</p>
           </div>
           <div>
             <p className="num-big text-xl">
               {rider.currentPeriod}/{rider.totalPeriods}
             </p>
-            <p className="text-[11px] text-white/80">Periods paid</p>
+            <p className="text-[11px] text-[rgba(41,41,41,0.8)]">Periods paid</p>
           </div>
           <div>
             <div className="flex justify-center">
               <RiskBadge level={rider.riskLevel} size="sm" />
             </div>
-            <p className="mt-1 text-[11px] text-white/80">Risk level</p>
+            <p className="mt-1 text-[11px] text-[rgba(41,41,41,0.8)]">Risk level</p>
           </div>
         </div>
       </section>

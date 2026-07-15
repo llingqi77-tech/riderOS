@@ -141,7 +141,7 @@ export default function RiskListPage() {
                 </button>
                 <button
                   onClick={() => setModalRider(r)}
-                  className="rounded-btn bg-info px-4 py-1.5 text-sm font-semibold text-white"
+                  className="rounded-btn bg-accent px-4 py-1.5 text-sm font-semibold text-neutral-900"
                 >
                   Intervene now
                 </button>

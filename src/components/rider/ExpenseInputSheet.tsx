@@ -150,7 +150,7 @@ export default function ExpenseInputSheet({
 
         <button
           onClick={submit}
-          className="w-full rounded-btn bg-brand py-3 font-semibold text-white active:scale-[0.99]"
+          className="w-full rounded-btn bg-accent py-3 font-semibold text-neutral-900 active:scale-[0.99]"
         >
           Confirm
         </button>

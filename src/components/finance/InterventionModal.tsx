@@ -75,7 +75,7 @@ export default function InterventionModal({
                   className={cn(
                     'flex flex-col items-center gap-1 rounded-btn border py-3 text-sm transition',
                     type === key
-                      ? 'border-info bg-info/10 text-info'
+                      ? 'border-brand bg-brand/10 text-brand-dark'
                       : 'border-neutral-200 text-neutral-500',
                   )}
                 >
@@ -89,7 +89,7 @@ export default function InterventionModal({
             <textarea
               defaultValue={prediction.recommendedAction.template}
               rows={3}
-              className="w-full rounded-btn border border-neutral-200 bg-canvas p-3 text-sm outline-none focus:border-info"
+              className="w-full rounded-btn border border-neutral-200 bg-canvas p-3 text-sm outline-none focus:border-brand"
             />
             <p className="mt-2 rounded-tag bg-brand/10 px-3 py-2 text-xs text-brand-dark">
               Expected impact: {prediction.recommendedAction.expectedImpact}
@@ -104,7 +104,7 @@ export default function InterventionModal({
               </button>
               <button
                 onClick={() => setSent(true)}
-                className="flex-[2] rounded-btn bg-info py-2.5 text-sm font-semibold text-white"
+                className="flex-[2] rounded-btn bg-accent py-2.5 text-sm font-semibold text-neutral-900"
               >
                 Send intervention
               </button>

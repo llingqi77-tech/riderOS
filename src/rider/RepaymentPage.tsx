@@ -15,25 +15,19 @@ export default function RepaymentPage() {
   const reminder = getReminderLevel(nextRepayment.daysUntilDue)
   const rate = repaymentAnalysis.attainmentRate
 
-  const rateColor =
-    rate >= 0.9 ? '#10B981' : rate >= 0.7 ? '#F59E0B' : rate >= 0.5 ? '#FB923C' : '#EF4444'
-
   return (
     <div className="space-y-4">
       <h1 className="text-lg font-bold">Repayment · {data.name}</h1>
 
-      <section
-        className="rounded-card p-5 text-white shadow-card"
-        style={{ background: `linear-gradient(135deg, ${rateColor}, ${rateColor}cc)` }}
-      >
-        <p className="text-sm text-white/85">Days until next repayment</p>
+      <section className="hero-lavender">
+        <p className="text-sm text-[rgba(41,41,41,0.8)]">Days until next repayment</p>
         <div className="mt-1 flex items-baseline gap-2">
           <span className="num-big text-[44px] leading-none">
             {nextRepayment.daysUntilDue}
           </span>
           <span className="text-lg">days</span>
         </div>
-        <div className="mt-3 flex items-center justify-between text-sm">
+        <div className="mt-3 flex items-center justify-between text-sm text-white/85">
           <span>Due {fmt(nextRepayment.amount)}</span>
           <span className="rounded-tag bg-white/20 px-2 py-0.5 text-xs font-semibold">
             {reminder.label} · {Math.round(rate * 100)}% on track
@@ -69,7 +63,7 @@ export default function RepaymentPage() {
         </button>
       </section>
 
-      <section className="rounded-card border border-warn/30 bg-warn/10 p-4">
+      <section className="rounded-card bg-[#eff7c5] p-4">
         <div className="flex items-center gap-2">
           <Clock3 size={18} className="text-warn" />
           <p className="text-sm font-bold">

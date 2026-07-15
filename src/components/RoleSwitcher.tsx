@@ -25,7 +25,7 @@ export default function RoleSwitcher() {
         className={cn(
           'flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-semibold transition',
           active === 'rider'
-            ? 'bg-brand text-white shadow'
+            ? 'bg-[linear-gradient(90deg,rgba(159,137,210,1)_36%,rgba(191,165,230,1)_64%)] text-white shadow'
             : 'text-neutral-500 hover:bg-neutral-50',
         )}
       >
@@ -37,7 +37,7 @@ export default function RoleSwitcher() {
         className={cn(
           'flex items-center gap-1.5 rounded-full px-3.5 py-2 text-sm font-semibold transition',
           active === 'finance'
-            ? 'bg-info text-white shadow'
+            ? 'bg-[linear-gradient(90deg,rgba(159,137,210,1)_36%,rgba(191,165,230,1)_64%)] text-white shadow'
             : 'text-neutral-500 hover:bg-neutral-50',
         )}
       >

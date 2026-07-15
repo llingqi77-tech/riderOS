@@ -18,17 +18,17 @@ export default function KpiCard({
     <button
       onClick={onClick}
       className={cn(
-        'rounded-card bg-white p-5 text-left shadow-card transition',
+        'hero-lavender text-left transition',
         onClick && 'hover:-translate-y-0.5 hover:shadow-md',
       )}
     >
-      <p className="text-sm text-neutral-500">{label}</p>
-      <p className="num-big mt-2 text-3xl text-neutral-900">{value}</p>
+      <p className="text-sm text-[rgba(41,41,41,0.8)]">{label}</p>
+      <p className="num-big mt-2 text-3xl">{value}</p>
       {delta && (
         <p
           className={cn(
             'mt-1.5 flex items-center gap-0.5 text-xs font-semibold',
-            positive ? 'text-brand' : 'text-danger',
+            positive ? 'text-white/85' : 'text-danger',
           )}
         >
           {positive ? <ArrowUpRight size={13} /> : <ArrowDownRight size={13} />}

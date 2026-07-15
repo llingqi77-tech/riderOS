@@ -64,8 +64,8 @@ export default function OrdersPage() {
         ))}
       </div>
 
-      <section className="rounded-card bg-gradient-to-br from-brand to-brand-dark p-5 text-white shadow-card">
-        <p className="text-sm text-white/85">
+      <section className="hero-lavender">
+        <p className="text-sm text-[rgba(41,41,41,0.8)]">
           Next 2 hours: take {plan.sequence.length} orders
         </p>
         <p className="num-big mt-1 text-4xl">{fmt(plan.totalEarnings)}</p>
@@ -82,12 +82,12 @@ export default function OrdersPage() {
         </div>
       </section>
 
-      <div className="relative h-28 overflow-hidden rounded-card bg-[linear-gradient(135deg,#dcfce7_0%,#dbeafe_100%)]">
+      <div className="relative h-28 overflow-hidden rounded-card bg-[linear-gradient(135deg,#ebe7f5_0%,#d9f97733_100%)]">
         <svg viewBox="0 0 300 100" className="h-full w-full">
           <polyline
             points="20,80 80,40 150,60 220,25 280,50"
             fill="none"
-            stroke="#10B981"
+            stroke="#9B8AFB"
             strokeWidth="3"
             strokeDasharray="6 5"
           />
@@ -98,7 +98,7 @@ export default function OrdersPage() {
             [220, 25],
             [280, 50],
           ].map(([x, y], i) => (
-            <circle key={i} cx={x} cy={y} r={i === 0 ? 5 : 4} fill="#059669" />
+            <circle key={i} cx={x} cy={y} r={i === 0 ? 5 : 4} fill="#6E5FD4" />
           ))}
         </svg>
         <span className="absolute left-3 top-2 rounded-tag bg-white/80 px-2 py-0.5 text-[10px] font-medium text-neutral-500">

@@ -40,8 +40,8 @@ export default function HomePage() {
 
   return (
     <div className="space-y-4">
-      <section className="rounded-card bg-gradient-to-br from-brand to-brand-dark p-5 text-white shadow-card">
-        <p className="text-sm text-white/80">Today&apos;s net income · {data.name}</p>
+      <section className="hero-lavender">
+        <p className="text-sm text-[rgba(41,41,41,0.8)]">Today&apos;s net income · {data.name}</p>
         <p className="num-big mt-1 text-[44px] leading-none">{fmt(net)}</p>
         <div className="mt-3 flex items-center justify-between text-xs text-white/85">
           <span>Target {fmt(todaySnapshot.todayTarget)}</span>
@@ -77,7 +77,7 @@ export default function HomePage() {
 
       <button
         onClick={() => navigate('/rider/repayment')}
-        className="flex w-full items-center gap-3 rounded-card border border-warn/30 bg-warn/10 p-4 text-left active:scale-[0.99]"
+        className="flex w-full items-center gap-3 rounded-card bg-[#eff7c5] p-4 text-left active:scale-[0.99]"
       >
         <span className="flex h-10 w-10 items-center justify-center rounded-full bg-warn/20 text-warn">
           <CalendarClock size={20} />

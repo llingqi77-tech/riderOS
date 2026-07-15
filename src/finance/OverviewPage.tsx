@@ -21,7 +21,7 @@ import {
 import KpiCard from '@/components/finance/KpiCard'
 import { cn } from '@/lib/cn'
 
-const PIE_COLORS = ['#EF4444', '#FB923C', '#F59E0B', '#3B82F6', '#6B7280']
+const PIE_COLORS = ['#EF4444', '#FB923C', '#F59E0B', '#9B8AFB', '#6B7280']
 const RANGES: OverviewRange[] = [30, 60, 90]
 
 export default function OverviewPage() {
@@ -49,7 +49,9 @@ export default function OverviewPage() {
               onClick={() => setRange(r)}
               className={cn(
                 'rounded-[6px] px-3 py-1.5 text-sm font-medium transition',
-                range === r ? 'bg-info text-white' : 'text-neutral-500',
+                range === r
+                  ? 'bg-[linear-gradient(90deg,rgba(159,137,210,1)_36%,rgba(191,165,230,1)_64%)] text-white'
+                  : 'text-neutral-500',
               )}
             >
               {r}d
@@ -138,8 +140,8 @@ export default function OverviewPage() {
             <YAxis tick={{ fontSize: 11, fill: '#6B7280' }} axisLine={false} tickLine={false} width={32} />
             <Tooltip contentStyle={{ fontSize: 12, borderRadius: 8 }} />
             <Legend wrapperStyle={{ fontSize: 12 }} />
-            <Bar dataKey="rate" name="Conversion %" fill="#10B981" radius={[4, 4, 0, 0]} />
-            <Line type="monotone" dataKey="roi" name="ROI (x)" stroke="#3B82F6" strokeWidth={2} />
+            <Bar dataKey="rate" name="Conversion %" fill="#9B8AFB" radius={[4, 4, 0, 0]} />
+            <Line type="monotone" dataKey="roi" name="ROI (x)" stroke="#6E5FD4" strokeWidth={2} />
           </ComposedChart>
         </ResponsiveContainer>
       </section>
