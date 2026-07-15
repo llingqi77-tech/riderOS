@@ -11,7 +11,7 @@ function getSpeechRecognition(): SpeechRecognitionCtor | null {
 }
 
 export function useSpeechRecognition({
-  lang = 'zh-CN',
+  lang = 'en-US',
   onResult,
 }: {
   lang?: string

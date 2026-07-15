@@ -7,7 +7,7 @@ export default function AIInsightCard({ text }: { text: string }) {
         <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand text-white">
           <Sparkles size={13} />
         </span>
-        <span className="text-sm font-bold text-brand-dark">AI 每日解读</span>
+        <span className="text-sm font-bold text-brand-dark">AI daily insight</span>
       </div>
       <p className="text-sm leading-relaxed text-neutral-900">{text}</p>
     </div>

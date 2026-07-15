@@ -7,9 +7,9 @@ import { cn } from '@/lib/cn'
 import OrderCard from '@/components/rider/OrderCard'
 
 const MODES: { key: PlanMode; label: string }[] = [
-  { key: 'optimal', label: '最优路径' },
-  { key: 'repayment', label: '还款冲刺' },
-  { key: 'low_intensity', label: '低强度' },
+  { key: 'optimal', label: 'Optimal path' },
+  { key: 'repayment', label: 'Repayment sprint' },
+  { key: 'low_intensity', label: 'Low intensity' },
 ]
 
 export default function OrdersPage() {
@@ -47,7 +47,7 @@ export default function OrdersPage() {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-lg font-bold">行动序列 · {data.name}</h1>
+      <h1 className="text-lg font-bold">Action sequence · {data.name}</h1>
 
       <div className="flex rounded-btn bg-neutral-200/60 p-1">
         {MODES.map((m) => (
@@ -66,18 +66,18 @@ export default function OrdersPage() {
 
       <section className="rounded-card bg-gradient-to-br from-brand to-brand-dark p-5 text-white shadow-card">
         <p className="text-sm text-white/85">
-          接下来 2 小时建议接 {plan.sequence.length} 单
+          Next 2 hours: take {plan.sequence.length} orders
         </p>
         <p className="num-big mt-1 text-4xl">{fmt(plan.totalEarnings)}</p>
         <div className="mt-3 flex gap-4 text-xs text-white/85">
           <span className="flex items-center gap-1">
-            <Clock size={13} /> 约 {plan.totalDuration} 分钟
+            <Clock size={13} /> ~{plan.totalDuration} min
           </span>
           <span className="flex items-center gap-1">
             <Route size={13} /> {plan.totalDistance.toFixed(1)} km
           </span>
           <span className="flex items-center gap-1">
-            <Wallet size={13} /> 净收入已扣油电
+            <Wallet size={13} /> Net after fuel/battery
           </span>
         </div>
       </section>
@@ -102,14 +102,14 @@ export default function OrdersPage() {
           ))}
         </svg>
         <span className="absolute left-3 top-2 rounded-tag bg-white/80 px-2 py-0.5 text-[10px] font-medium text-neutral-500">
-          {data.name} 路径预览
+          {data.name} route preview
         </span>
       </div>
 
       <div className="space-y-2.5">
         {plan.sequence.length === 0 ? (
           <div className="rounded-card bg-white p-8 text-center text-sm text-neutral-500">
-            {data.name} 暂无订单，稍后再来
+            No orders in {data.name} — check back later
           </div>
         ) : (
           plan.sequence.map((o, i) => (
@@ -132,7 +132,7 @@ export default function OrdersPage() {
         }}
         className="w-full rounded-btn border border-neutral-200 bg-white py-2.5 text-sm font-medium text-neutral-500"
       >
-        重新规划 · 查看所有订单（{allOrders.length}）
+        Replan · view all orders ({allOrders.length})
       </button>
     </div>
   )

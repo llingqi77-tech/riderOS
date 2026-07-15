@@ -80,7 +80,7 @@ export function planRoute(req: PlanRequest): PlanResult {
   return { sequence, totalEarnings, totalDuration, totalDistance }
 }
 
-/** 净收入 = 平台总收入 - 平台抽成(15%) - 支出 */
+/** Net income = platform gross - platform fee (15%) - expenses */
 export function calculateNetIncome(gross: number, expenses: number): number {
   const platformFee = gross * 0.15
   return Math.round(gross - platformFee - expenses)

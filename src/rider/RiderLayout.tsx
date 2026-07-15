@@ -12,11 +12,11 @@ import { useRiderStore } from '@/store/riderStore'
 import { cn } from '@/lib/cn'
 
 const TABS = [
-  { to: '/rider/home', label: '首页', icon: Home },
-  { to: '/rider/orders', label: '接单', icon: Zap },
-  { to: '/rider/income', label: '收入', icon: Wallet },
-  { to: '/rider/repayment', label: '还款', icon: LayoutList },
-  { to: '/rider/me', label: '我的', icon: User },
+  { to: '/rider/home', label: 'Home', icon: Home },
+  { to: '/rider/orders', label: 'Orders', icon: Zap },
+  { to: '/rider/income', label: 'Income', icon: Wallet },
+  { to: '/rider/repayment', label: 'Repayment', icon: LayoutList },
+  { to: '/rider/me', label: 'Me', icon: User },
 ]
 
 export default function RiderLayout() {
@@ -29,7 +29,7 @@ export default function RiderLayout() {
       {/* Top AppBar */}
       <header className="flex shrink-0 items-center justify-between px-4 py-3">
         {isMe ? (
-          <h1 className="w-full text-center text-lg font-bold">我的</h1>
+          <h1 className="w-full text-center text-lg font-bold">Me</h1>
         ) : (
           <>
             <CitySelector />

@@ -37,9 +37,9 @@ export default function OverviewPage() {
     <div>
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">风险总览</h1>
+          <h1 className="text-2xl font-bold">Risk Overview</h1>
           <p className="mt-1 text-sm text-neutral-500">
-            每日 9:00 自动跑批 · 当前查看近 {range} 天数据
+            Daily batch at 9:00 · showing last {range} days
           </p>
         </div>
         <div className="flex rounded-btn border border-neutral-200 bg-white p-1">
@@ -52,7 +52,7 @@ export default function OverviewPage() {
                 range === r ? 'bg-info text-white' : 'text-neutral-500',
               )}
             >
-              {r} 天
+              {r}d
             </button>
           ))}
         </div>
@@ -62,7 +62,7 @@ export default function OverviewPage() {
         {kpis.map((k) => (
           <KpiCard
             key={k.key}
-            label={`${k.label}（${range} 天）`}
+            label={`${k.label} (${range}d)`}
             value={k.value}
             delta={k.delta}
             positive={k.trend === 'up'}
@@ -73,7 +73,7 @@ export default function OverviewPage() {
 
       <div className="mb-6 grid grid-cols-3 gap-4">
         <section className="col-span-2 rounded-card bg-white p-5 shadow-card">
-          <p className="mb-4 text-base font-bold">风险人数趋势（{range} 天）</p>
+          <p className="mb-4 text-base font-bold">Risk headcount trend ({range}d)</p>
           <ResponsiveContainer width="100%" height={280}>
             <LineChart data={riskTrend}>
               <XAxis
@@ -86,16 +86,16 @@ export default function OverviewPage() {
               <YAxis tick={{ fontSize: 11, fill: '#6B7280' }} axisLine={false} tickLine={false} width={32} />
               <Tooltip contentStyle={{ fontSize: 12, borderRadius: 8 }} />
               <Legend wrapperStyle={{ fontSize: 12 }} />
-              <Line type="monotone" dataKey="green" name="健康" stroke="#10B981" strokeWidth={2} dot={false} />
-              <Line type="monotone" dataKey="yellow" name="关注" stroke="#F59E0B" strokeWidth={2} dot={false} />
-              <Line type="monotone" dataKey="orange" name="警告" stroke="#FB923C" strokeWidth={2} dot={false} />
-              <Line type="monotone" dataKey="red" name="危险" stroke="#EF4444" strokeWidth={2} dot={false} />
+              <Line type="monotone" dataKey="green" name="Healthy" stroke="#10B981" strokeWidth={2} dot={false} />
+              <Line type="monotone" dataKey="yellow" name="Watch" stroke="#F59E0B" strokeWidth={2} dot={false} />
+              <Line type="monotone" dataKey="orange" name="Warning" stroke="#FB923C" strokeWidth={2} dot={false} />
+              <Line type="monotone" dataKey="red" name="Critical" stroke="#EF4444" strokeWidth={2} dot={false} />
             </LineChart>
           </ResponsiveContainer>
         </section>
 
         <section className="rounded-card bg-white p-5 shadow-card">
-          <p className="mb-4 text-base font-bold">风险原因分布（{range} 天）</p>
+          <p className="mb-4 text-base font-bold">Risk reason mix ({range}d)</p>
           <ResponsiveContainer width="100%" height={220}>
             <PieChart>
               <Pie
@@ -130,7 +130,7 @@ export default function OverviewPage() {
 
       <section className="rounded-card bg-white p-5 shadow-card">
         <p className="mb-4 text-base font-bold">
-          干预效果趋势（近 {conversionTrend.length} 周 · 转化率 & ROI）
+          Intervention impact (last {conversionTrend.length} weeks · conversion & ROI)
         </p>
         <ResponsiveContainer width="100%" height={220}>
           <ComposedChart data={conversionTrend}>
@@ -138,7 +138,7 @@ export default function OverviewPage() {
             <YAxis tick={{ fontSize: 11, fill: '#6B7280' }} axisLine={false} tickLine={false} width={32} />
             <Tooltip contentStyle={{ fontSize: 12, borderRadius: 8 }} />
             <Legend wrapperStyle={{ fontSize: 12 }} />
-            <Bar dataKey="rate" name="转化率 %" fill="#10B981" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="rate" name="Conversion %" fill="#10B981" radius={[4, 4, 0, 0]} />
             <Line type="monotone" dataKey="roi" name="ROI (x)" stroke="#3B82F6" strokeWidth={2} />
           </ComposedChart>
         </ResponsiveContainer>

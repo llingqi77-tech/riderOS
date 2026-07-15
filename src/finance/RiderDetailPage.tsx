@@ -22,20 +22,20 @@ import { RISK_META, cn } from '@/lib/cn'
 import RiskLevelBadge from '@/components/finance/RiskLevelBadge'
 import InterventionModal from '@/components/finance/InterventionModal'
 
-const TABS = ['收入与还款', '风险预测', '风险原因'] as const
+const TABS = ['Income & repayment', 'Risk forecast', 'Risk drivers'] as const
 type Tab = (typeof TABS)[number]
 
 export default function RiderDetailPage() {
   const { id } = useParams()
   const navigate = useNavigate()
   const rider = id ? ridersById[id] : undefined
-  const [tab, setTab] = useState<Tab>('收入与还款')
+  const [tab, setTab] = useState<Tab>('Income & repayment')
   const [modal, setModal] = useState(false)
 
   if (!rider) {
     return (
       <div className="rounded-card bg-white p-10 text-center text-neutral-500 shadow-card">
-        未找到该骑手
+        Rider not found
       </div>
     )
   }
@@ -44,9 +44,9 @@ export default function RiderDetailPage() {
   const pred = buildPrediction(rider)
 
   const probBars = [
-    { label: '7 天', value: Math.round(pred.overdueProbability7d * 100) },
-    { label: '14 天', value: Math.round(pred.overdueProbability14d * 100) },
-    { label: '30 天', value: Math.round(pred.overdueProbability30d * 100) },
+    { label: '7d', value: Math.round(pred.overdueProbability7d * 100) },
+    { label: '14d', value: Math.round(pred.overdueProbability14d * 100) },
+    { label: '30d', value: Math.round(pred.overdueProbability30d * 100) },
   ]
 
   return (
@@ -55,7 +55,7 @@ export default function RiderDetailPage() {
         onClick={() => navigate('/finance/risk-list')}
         className="mb-4 flex items-center gap-1 text-sm text-neutral-500 hover:text-neutral-900"
       >
-        <ArrowLeft size={15} /> 返回列表
+        <ArrowLeft size={15} /> Back to list
       </button>
 
       {/* Header */}
@@ -70,27 +70,27 @@ export default function RiderDetailPage() {
             </span>
           </div>
           <p className="mt-1 text-sm text-neutral-500">
-            {rider.riderId} · {rider.city} · {rider.financeCompany} · 信用分{' '}
+            {rider.riderId} · {rider.city} · {rider.financeCompany} · Credit score{' '}
             <span className="font-semibold text-neutral-900">{rider.creditScore}</span>
           </p>
         </div>
         <button className="flex items-center gap-1.5 rounded-btn border border-neutral-200 px-4 py-2 text-sm font-medium text-neutral-500">
-          <FileDown size={15} /> 导出 PDF
+          <FileDown size={15} /> Export PDF
         </button>
         <button
           onClick={() => setModal(true)}
           className="rounded-btn bg-info px-5 py-2 text-sm font-semibold text-white"
         >
-          立即干预
+          Intervene now
         </button>
       </section>
 
       {/* KPI */}
       <div className="mb-5 grid grid-cols-4 gap-4">
-        <MiniKpi label="30 天日均净收入" value={formatNGN(detail.avgDailyNet)} />
-        <MiniKpi label="当前 DPD" value={`${detail.dpd} 天`} />
-        <MiniKpi label="距下次还款" value={`${detail.daysUntilDue} 天`} />
-        <MiniKpi label="历史按时还款率" value={formatPercent(detail.onTimeRate)} />
+        <MiniKpi label="30d avg daily net" value={formatNGN(detail.avgDailyNet)} />
+        <MiniKpi label="Current DPD" value={`${detail.dpd} days`} />
+        <MiniKpi label="Days until due" value={`${detail.daysUntilDue} days`} />
+        <MiniKpi label="Historical on-time rate" value={formatPercent(detail.onTimeRate)} />
       </div>
 
       {/* Tabs */}
@@ -112,21 +112,21 @@ export default function RiderDetailPage() {
       </div>
 
       {/* Tab content */}
-      {tab === '收入与还款' && (
+      {tab === 'Income & repayment' && (
         <div className="grid grid-cols-3 gap-4">
           <section className="col-span-2 rounded-card bg-white p-5 shadow-card">
-            <p className="mb-4 text-base font-bold">30 天日均净收入</p>
+            <p className="mb-4 text-base font-bold">30d avg daily net</p>
             <ResponsiveContainer width="100%" height={260}>
               <LineChart data={detail.trend}>
                 <XAxis dataKey="label" tick={{ fontSize: 10, fill: '#6B7280' }} axisLine={false} tickLine={false} interval={4} />
                 <YAxis tick={{ fontSize: 11, fill: '#6B7280' }} axisLine={false} tickLine={false} width={40} />
                 <Tooltip formatter={(v: number) => formatNGN(v)} contentStyle={{ fontSize: 12, borderRadius: 8 }} />
-                <Line type="monotone" dataKey="net" name="净收入" stroke="#10B981" strokeWidth={2} dot={false} />
+                <Line type="monotone" dataKey="net" name="Net income" stroke="#10B981" strokeWidth={2} dot={false} />
               </LineChart>
             </ResponsiveContainer>
           </section>
           <section className="rounded-card bg-white p-5 shadow-card">
-            <p className="mb-4 text-base font-bold">12 期还款历史</p>
+            <p className="mb-4 text-base font-bold">12-period repayment history</p>
             <div className="grid grid-cols-4 gap-2">
               {detail.repayHistory.map((h) => (
                 <div
@@ -139,7 +139,7 @@ export default function RiderDetailPage() {
                   )}
                 >
                   <span className="text-sm">{h.period}</span>
-                  {h.status === 'paid' ? '已还' : '逾期'}
+                  {h.status === 'paid' ? 'Paid' : 'Late'}
                 </div>
               ))}
             </div>
@@ -147,12 +147,12 @@ export default function RiderDetailPage() {
         </div>
       )}
 
-      {tab === '风险预测' && (
+      {tab === 'Risk forecast' && (
         <section className="rounded-card bg-white p-5 shadow-card">
           <div className="mb-4 flex items-center justify-between">
-            <p className="text-base font-bold">逾期概率预测</p>
+            <p className="text-base font-bold">Overdue probability forecast</p>
             <p className="text-xs text-neutral-500">
-              模型更新于 {new Date(pred.predictedAt).toLocaleString('zh-CN')}
+              Model updated {new Date(pred.predictedAt).toLocaleString('en-GB')}
             </p>
           </div>
           <ResponsiveContainer width="100%" height={260}>
@@ -160,7 +160,7 @@ export default function RiderDetailPage() {
               <XAxis dataKey="label" tick={{ fontSize: 12, fill: '#6B7280' }} axisLine={false} tickLine={false} />
               <YAxis tick={{ fontSize: 11, fill: '#6B7280' }} axisLine={false} tickLine={false} width={32} unit="%" />
               <Tooltip formatter={(v: number) => `${v}%`} contentStyle={{ fontSize: 12, borderRadius: 8 }} />
-              <Bar dataKey="value" name="逾期概率" radius={[6, 6, 0, 0]}>
+              <Bar dataKey="value" name="Overdue probability" radius={[6, 6, 0, 0]}>
                 {probBars.map((_, i) => (
                   <Cell key={i} fill={RISK_META[rider.riskLevel].color} />
                 ))}
@@ -168,14 +168,14 @@ export default function RiderDetailPage() {
             </BarChart>
           </ResponsiveContainer>
           <p className="mt-3 rounded-tag bg-canvas px-3 py-2 text-xs text-neutral-500">
-            风险阈值：概率 ≥ 70% 判定为「危险(红)」，45%-70% 为「警告(橙)」，25%-45% 为「关注(黄)」。
+            Thresholds: ≥70% Critical (red), 45–70% Warning (orange), 25–45% Watch (yellow).
           </p>
         </section>
       )}
 
-      {tab === '风险原因' && (
+      {tab === 'Risk drivers' && (
         <section className="rounded-card bg-white p-5 shadow-card">
-          <p className="mb-4 text-base font-bold">风险原因分析（SHAP 贡献度）</p>
+          <p className="mb-4 text-base font-bold">Risk driver analysis (SHAP contribution)</p>
           <div className="space-y-4">
             {pred.reasons.map((r) => (
               <div key={r.factor}>

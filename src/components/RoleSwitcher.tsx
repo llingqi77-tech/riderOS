@@ -18,7 +18,7 @@ export default function RoleSwitcher() {
   return (
     <div className="fixed right-5 top-5 z-50 flex items-center gap-1 rounded-full border border-white/60 bg-white/85 p-1 shadow-phone backdrop-blur">
       <span className="hidden pl-3 pr-1 text-xs font-semibold text-neutral-500 sm:inline">
-        角色切换
+        Switch role
       </span>
       <button
         onClick={() => switchTo('rider')}
@@ -30,7 +30,7 @@ export default function RoleSwitcher() {
         )}
       >
         <Bike size={16} />
-        骑手端
+        Rider
       </button>
       <button
         onClick={() => switchTo('finance')}
@@ -42,7 +42,7 @@ export default function RoleSwitcher() {
         )}
       >
         <Building2 size={16} />
-        金融端
+        Finance
       </button>
     </div>
   )

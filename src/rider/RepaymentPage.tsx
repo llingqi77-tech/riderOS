@@ -20,23 +20,23 @@ export default function RepaymentPage() {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-lg font-bold">还款 · {data.name}</h1>
+      <h1 className="text-lg font-bold">Repayment · {data.name}</h1>
 
       <section
         className="rounded-card p-5 text-white shadow-card"
         style={{ background: `linear-gradient(135deg, ${rateColor}, ${rateColor}cc)` }}
       >
-        <p className="text-sm text-white/85">距离下次还款</p>
+        <p className="text-sm text-white/85">Days until next repayment</p>
         <div className="mt-1 flex items-baseline gap-2">
           <span className="num-big text-[44px] leading-none">
             {nextRepayment.daysUntilDue}
           </span>
-          <span className="text-lg">天</span>
+          <span className="text-lg">days</span>
         </div>
         <div className="mt-3 flex items-center justify-between text-sm">
-          <span>应还 {fmt(nextRepayment.amount)}</span>
+          <span>Due {fmt(nextRepayment.amount)}</span>
           <span className="rounded-tag bg-white/20 px-2 py-0.5 text-xs font-semibold">
-            {reminder.label} · 达标率 {Math.round(rate * 100)}%
+            {reminder.label} · {Math.round(rate * 100)}% on track
           </span>
         </div>
         <div className="mt-2 h-2 overflow-hidden rounded-full bg-white/25">
@@ -48,14 +48,14 @@ export default function RepaymentPage() {
       </section>
 
       <section className="rounded-card bg-white p-4 shadow-card">
-        <p className="mb-3 text-sm font-bold">达标率分析</p>
+        <p className="mb-3 text-sm font-bold">Attainment analysis</p>
         <div className="space-y-2 text-sm">
-          <Row label="本周期已净收入" value={fmt(repaymentAnalysis.earnedSoFar)} />
-          <Row label="预计净收入（14 天均值）" value={fmt(repaymentAnalysis.projected)} />
-          <Row label="应还金额" value={fmt(repaymentAnalysis.required)} />
+          <Row label="Net earned this cycle" value={fmt(repaymentAnalysis.earnedSoFar)} />
+          <Row label="Projected net (14-day avg)" value={fmt(repaymentAnalysis.projected)} />
+          <Row label="Amount due" value={fmt(repaymentAnalysis.required)} />
           <div className="my-2 border-t border-dashed border-neutral-200" />
           <Row
-            label="预计差额"
+            label="Projected gap"
             value={`${repaymentAnalysis.gap >= 0 ? '+' : '-'}${fmt(Math.abs(repaymentAnalysis.gap))}`}
             highlight={repaymentAnalysis.gap >= 0 ? 'brand' : 'danger'}
           />
@@ -65,7 +65,7 @@ export default function RepaymentPage() {
           className="mt-3 flex w-full items-center justify-center gap-1.5 rounded-btn bg-brand/10 py-2.5 text-sm font-semibold text-brand-dark"
         >
           <TrendingUp size={15} />
-          加班建议：开启"还款冲刺"模式
+          Tip: enable &quot;Repayment sprint&quot; mode
         </button>
       </section>
 
@@ -73,7 +73,7 @@ export default function RepaymentPage() {
         <div className="flex items-center gap-2">
           <Clock3 size={18} className="text-warn" />
           <p className="text-sm font-bold">
-            {nextRepayment.daysUntilDue <= 3 ? '提前 3 天提醒' : '还款观察期'}
+            {nextRepayment.daysUntilDue <= 3 ? '3-day early reminder' : 'Repayment watch period'}
           </p>
         </div>
         <p className="mt-1.5 text-xs leading-relaxed text-neutral-900">
@@ -90,11 +90,11 @@ export default function RepaymentPage() {
         )}
       >
         <CheckCircle2 size={18} />
-        {paid ? '已同步金融方系统' : '我已还款'}
+        {paid ? 'Synced to lender systems' : 'I have repaid'}
       </button>
 
       <section className="rounded-card bg-white p-4 shadow-card">
-        <p className="mb-3 text-sm font-bold">还款历史（最近 12 期）</p>
+        <p className="mb-3 text-sm font-bold">Repayment history (last 12 periods)</p>
         <div className="grid grid-cols-6 gap-2">
           {repaymentHistory.map((h) => {
             const color =
@@ -109,7 +109,7 @@ export default function RepaymentPage() {
                 className={`flex aspect-square flex-col items-center justify-center rounded-btn text-[10px] font-semibold ${color}`}
               >
                 <span className="text-sm">{h.scheduleId.replace('sch_', '')}</span>
-                {h.status === 'paid' ? '已还' : h.status === 'overdue' ? '逾期' : '待还'}
+                {h.status === 'paid' ? 'Paid' : h.status === 'overdue' ? 'Late' : 'Due'}
               </div>
             )
           })}

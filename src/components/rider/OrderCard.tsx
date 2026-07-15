@@ -49,10 +49,10 @@ export default function OrderCard({
               <MapPin size={12} /> {order.distance} km
             </span>
             <span className="flex items-center gap-0.5">
-              <Clock size={12} /> {order.estimatedDuration} 分
+              <Clock size={12} /> {order.estimatedDuration} min
             </span>
             <span className="flex items-center gap-0.5">
-              <Bike size={12} /> 出餐 {order.pickupEta} 分
+              <Bike size={12} /> Ready in {order.pickupEta} min
             </span>
           </div>
         </div>
@@ -62,7 +62,7 @@ export default function OrderCard({
       </div>
 
       <p className="mt-2 rounded-tag bg-canvas px-2 py-1 text-[11px] text-neutral-500">
-        机会成本：跳过此单预计少赚 {fmt(Math.round(order.estimatedEarnings * 0.85))}
+        Opportunity cost: skipping may cost ~{fmt(Math.round(order.estimatedEarnings * 0.85))}
       </p>
 
       <div className="mt-2.5 flex gap-2">
@@ -70,13 +70,13 @@ export default function OrderCard({
           onClick={onSkip}
           className="flex-1 rounded-btn border border-neutral-200 py-1.5 text-sm font-medium text-neutral-500"
         >
-          跳过
+          Skip
         </button>
         <button
           onClick={onAccept}
           className="flex-[2] rounded-btn bg-brand py-1.5 text-sm font-semibold text-white active:scale-[0.99]"
         >
-          接受
+          Accept
         </button>
       </div>
     </div>

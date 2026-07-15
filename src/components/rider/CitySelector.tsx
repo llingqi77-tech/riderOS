@@ -46,7 +46,7 @@ export default function CitySelector() {
       {open && (
         <div className="absolute left-0 top-full z-50 mt-1.5 w-52 overflow-hidden rounded-card border border-neutral-200 bg-white shadow-phone">
           <p className="border-b border-neutral-200 px-3 py-2 text-[11px] font-semibold text-neutral-500">
-            切换接单城市
+            Switch work city
           </p>
           {CITY_LIST.map((c) => {
             const active = c.id === city
@@ -76,7 +76,7 @@ export default function CitySelector() {
             )
           })}
           <p className="border-t border-neutral-200 px-3 py-2 text-[10px] text-neutral-500">
-            切换后订单池、收入与还款数据将同步更新
+            Orders, income, and repayment data refresh after switching
           </p>
         </div>
       )}

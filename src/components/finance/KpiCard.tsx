@@ -32,7 +32,7 @@ export default function KpiCard({
           )}
         >
           {positive ? <ArrowUpRight size={13} /> : <ArrowDownRight size={13} />}
-          {delta} 较上月
+          {delta} vs last month
         </p>
       )}
     </button>

@@ -15,10 +15,10 @@ import ExpenseInputSheet from '@/components/rider/ExpenseInputSheet'
 import type { ExpenseCategory } from '@/types'
 
 const QUICK_EXPENSE = [
-  { key: 'fuel' as const, label: '加油', icon: Fuel },
-  { key: 'electricity' as const, label: '换电', icon: BatteryCharging },
-  { key: 'food' as const, label: '餐食', icon: UtensilsCrossed },
-  { key: 'maintenance' as const, label: '维修', icon: Wrench },
+  { key: 'fuel' as const, label: 'Fuel', icon: Fuel },
+  { key: 'electricity' as const, label: 'Battery', icon: BatteryCharging },
+  { key: 'food' as const, label: 'Food', icon: UtensilsCrossed },
+  { key: 'maintenance' as const, label: 'Repair', icon: Wrench },
 ]
 
 export default function HomePage() {
@@ -41,11 +41,11 @@ export default function HomePage() {
   return (
     <div className="space-y-4">
       <section className="rounded-card bg-gradient-to-br from-brand to-brand-dark p-5 text-white shadow-card">
-        <p className="text-sm text-white/80">今日净收入 · {data.name}</p>
+        <p className="text-sm text-white/80">Today&apos;s net income · {data.name}</p>
         <p className="num-big mt-1 text-[44px] leading-none">{fmt(net)}</p>
         <div className="mt-3 flex items-center justify-between text-xs text-white/85">
-          <span>目标 {fmt(todaySnapshot.todayTarget)}</span>
-          <span>{Math.round(progress * 100)}% 已达成</span>
+          <span>Target {fmt(todaySnapshot.todayTarget)}</span>
+          <span>{Math.round(progress * 100)}% complete</span>
         </div>
         <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-white/25">
           <div
@@ -55,8 +55,8 @@ export default function HomePage() {
         </div>
         <p className="mt-3 text-sm font-medium">
           {gap > 0
-            ? `再赚 ${fmt(gap)} 就能达成今日目标 · ${todaySnapshot.dailyEta}`
-            : '已完成今日目标，干得漂亮！'}
+            ? `Earn ${fmt(gap)} more to hit today's target · ${todaySnapshot.dailyEta}`
+            : "Today's target hit — great work!"}
         </p>
       </section>
 
@@ -65,13 +65,13 @@ export default function HomePage() {
         className="flex w-full items-center justify-between rounded-card bg-white p-4 text-left shadow-card active:scale-[0.99]"
       >
         <div>
-          <p className="text-sm font-bold">行动序列推荐</p>
+          <p className="text-sm font-bold">Recommended action sequence</p>
           <p className="mt-0.5 text-xs text-neutral-500">
-            接下来 2 小时建议接 <span className="font-semibold text-brand">3 单</span>
+            Next 2 hours: take <span className="font-semibold text-brand">3 orders</span>
           </p>
         </div>
         <span className="flex items-center gap-1 rounded-btn bg-brand/10 px-3 py-2 text-sm font-semibold text-brand">
-          去接单 <ArrowRight size={15} />
+          Go accept <ArrowRight size={15} />
         </span>
       </button>
 
@@ -84,10 +84,10 @@ export default function HomePage() {
         </span>
         <div className="flex-1">
           <p className="text-sm font-bold text-neutral-900">
-            还款日还剩 {nextRepayment.daysUntilDue} 天
+            {nextRepayment.daysUntilDue} days until repayment
           </p>
           <p className="mt-0.5 text-xs text-neutral-500">
-            应还 {fmt(nextRepayment.amount)} · 预期达标率{' '}
+            Due {fmt(nextRepayment.amount)} · expected attainment{' '}
             {Math.round(data.repaymentAnalysis.attainmentRate * 100)}%
           </p>
         </div>
@@ -95,7 +95,7 @@ export default function HomePage() {
       </button>
 
       <section className="rounded-card bg-white p-4 shadow-card">
-        <p className="mb-3 text-sm font-bold">今日支出速记</p>
+        <p className="mb-3 text-sm font-bold">Quick expense log</p>
         <div className="grid grid-cols-4 gap-2">
           {QUICK_EXPENSE.map(({ key, label, icon: Icon }) => (
             <button

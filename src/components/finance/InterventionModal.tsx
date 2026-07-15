@@ -6,9 +6,9 @@ import RiskLevelBadge from './RiskLevelBadge'
 import { cn } from '@/lib/cn'
 
 const TYPES = [
-  { key: 'sms', label: '短信', icon: MessageSquare },
-  { key: 'call', label: '电话', icon: Phone },
-  { key: 'meeting', label: '面谈', icon: Users },
+  { key: 'sms', label: 'SMS', icon: MessageSquare },
+  { key: 'call', label: 'Call', icon: Phone },
+  { key: 'meeting', label: 'Meeting', icon: Users },
 ] as const
 
 export default function InterventionModal({
@@ -38,7 +38,7 @@ export default function InterventionModal({
               <div className="mt-0.5 flex items-center gap-2">
                 <RiskLevelBadge level={rider.riskLevel} />
                 <span className="text-xs text-neutral-500">
-                  逾期概率 {Math.round(rider.riskProbability * 100)}%
+                  Overdue probability {Math.round(rider.riskProbability * 100)}%
                 </span>
               </div>
             </div>
@@ -53,20 +53,20 @@ export default function InterventionModal({
             <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand/10 text-brand">
               <MessageSquare size={22} />
             </div>
-            <p className="font-semibold">干预已发送</p>
+            <p className="font-semibold">Intervention sent</p>
             <p className="mt-1 text-sm text-neutral-500">
-              {prediction.recommendedAction.expectedImpact}，将在干预追踪中记录效果。
+              {prediction.recommendedAction.expectedImpact}. Impact will appear in Interventions.
             </p>
             <button
               onClick={onClose}
               className="mt-5 rounded-btn bg-brand px-6 py-2 text-sm font-semibold text-white"
             >
-              完成
+              Done
             </button>
           </div>
         ) : (
           <>
-            <p className="mb-2 text-sm font-semibold">选择干预方式</p>
+            <p className="mb-2 text-sm font-semibold">Choose channel</p>
             <div className="mb-4 grid grid-cols-3 gap-2">
               {TYPES.map(({ key, label, icon: Icon }) => (
                 <button
@@ -85,14 +85,14 @@ export default function InterventionModal({
               ))}
             </div>
 
-            <p className="mb-2 text-sm font-semibold">建议话术（可编辑）</p>
+            <p className="mb-2 text-sm font-semibold">Suggested script (editable)</p>
             <textarea
               defaultValue={prediction.recommendedAction.template}
               rows={3}
               className="w-full rounded-btn border border-neutral-200 bg-canvas p-3 text-sm outline-none focus:border-info"
             />
             <p className="mt-2 rounded-tag bg-brand/10 px-3 py-2 text-xs text-brand-dark">
-              预期效果：{prediction.recommendedAction.expectedImpact}
+              Expected impact: {prediction.recommendedAction.expectedImpact}
             </p>
 
             <div className="mt-5 flex gap-2">
@@ -100,13 +100,13 @@ export default function InterventionModal({
                 onClick={onClose}
                 className="flex-1 rounded-btn border border-neutral-200 py-2.5 text-sm font-medium text-neutral-500"
               >
-                取消
+                Cancel
               </button>
               <button
                 onClick={() => setSent(true)}
                 className="flex-[2] rounded-btn bg-info py-2.5 text-sm font-semibold text-white"
               >
-                确认发送干预
+                Send intervention
               </button>
             </div>
           </>

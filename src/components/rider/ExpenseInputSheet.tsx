@@ -14,10 +14,10 @@ import { parseSpeechAmount } from '@/lib/parseSpeechAmount'
 import { cn } from '@/lib/cn'
 
 const CATS: { key: ExpenseCategory; label: string; icon: typeof Fuel }[] = [
-  { key: 'fuel', label: '加油', icon: Fuel },
-  { key: 'electricity', label: '换电', icon: BatteryCharging },
-  { key: 'food', label: '餐食', icon: UtensilsCrossed },
-  { key: 'maintenance', label: '维修', icon: Wrench },
+  { key: 'fuel', label: 'Fuel', icon: Fuel },
+  { key: 'electricity', label: 'Battery', icon: BatteryCharging },
+  { key: 'food', label: 'Food', icon: UtensilsCrossed },
+  { key: 'maintenance', label: 'Repair', icon: Wrench },
 ]
 
 export default function ExpenseInputSheet({
@@ -81,7 +81,7 @@ export default function ExpenseInputSheet({
       <div className="absolute inset-0 bg-black/40" onClick={handleClose} />
       <div className="relative z-10 rounded-t-3xl bg-white p-5 pb-8 shadow-phone">
         <div className="mb-4 flex items-center justify-between">
-          <h3 className="text-base font-bold">记一笔支出</h3>
+          <h3 className="text-base font-bold">Log an expense</h3>
           <button onClick={handleClose} className="text-neutral-500">
             <X size={20} />
           </button>
@@ -136,15 +136,15 @@ export default function ExpenseInputSheet({
         >
           <Mic size={20} className={cn(listening && 'animate-pulse')} />
           {listening
-            ? '正在听…点击结束'
+            ? 'Listening… tap to stop'
             : supported
-              ? '语音录入金额'
-              : '当前浏览器不支持语音'}
+              ? 'Voice enter amount'
+              : 'Speech not supported in this browser'}
         </button>
 
         {voiceHint && (
           <p className="mb-4 -mt-3 text-center text-xs text-neutral-400">
-            识别：{voiceHint}
+            Heard: {voiceHint}
           </p>
         )}
 
@@ -152,7 +152,7 @@ export default function ExpenseInputSheet({
           onClick={submit}
           className="w-full rounded-btn bg-brand py-3 font-semibold text-white active:scale-[0.99]"
         >
-          确认录入
+          Confirm
         </button>
       </div>
     </div>

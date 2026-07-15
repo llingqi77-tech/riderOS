@@ -37,26 +37,26 @@ export default function MePage() {
               {rider.riderId} · {rider.financeCompany}
             </p>
             <p className="mt-0.5 flex items-center gap-1 text-xs text-white/70">
-              <MapPin size={11} /> 当前城市：{data.name}
+              <MapPin size={11} /> Current city: {data.name}
             </p>
           </div>
         </div>
         <div className="mt-4 grid grid-cols-3 gap-2 text-center">
           <div>
             <p className="num-big text-xl">{rider.creditScore}</p>
-            <p className="text-[11px] text-white/80">信用分</p>
+            <p className="text-[11px] text-white/80">Credit score</p>
           </div>
           <div>
             <p className="num-big text-xl">
               {rider.currentPeriod}/{rider.totalPeriods}
             </p>
-            <p className="text-[11px] text-white/80">已还期数</p>
+            <p className="text-[11px] text-white/80">Periods paid</p>
           </div>
           <div>
             <div className="flex justify-center">
               <RiskBadge level={rider.riskLevel} size="sm" />
             </div>
-            <p className="mt-1 text-[11px] text-white/80">风险等级</p>
+            <p className="mt-1 text-[11px] text-white/80">Risk level</p>
           </div>
         </div>
       </section>
@@ -69,27 +69,27 @@ export default function MePage() {
           <Receipt size={20} />
         </span>
         <div className="flex-1 text-left">
-          <p className="text-sm font-semibold">支出录入</p>
-          <p className="text-xs text-neutral-500">今日已录入 {fmt(extraExpense)}</p>
+          <p className="text-sm font-semibold">Log expense</p>
+          <p className="text-xs text-neutral-500">Logged today {fmt(extraExpense)}</p>
         </div>
         <ChevronRight size={18} className="text-neutral-500" />
       </button>
 
       <section className="overflow-hidden rounded-card bg-white shadow-card">
-        <SettingRow icon={Shield} label="数据与隐私" desc="授权管理" />
+        <SettingRow icon={Shield} label="Data & privacy" desc="Permissions" />
         <SettingRow
           icon={Globe}
-          label="语言 / Language"
+          label="Language"
           desc={lang === 'en' ? 'English' : 'Kiswahili'}
           onClick={() => setLang((l) => (l === 'en' ? 'sw-KE' : 'en'))}
         />
-        <SettingRow icon={Trash2} label="清除缓存" desc="12.4 MB" />
-        <SettingRow icon={HelpCircle} label="关于 / 帮助" />
+        <SettingRow icon={Trash2} label="Clear cache" desc="12.4 MB" />
+        <SettingRow icon={HelpCircle} label="About / Help" />
       </section>
 
       <button className="flex w-full items-center justify-center gap-1.5 rounded-card bg-white py-3 text-sm font-semibold text-danger shadow-card">
         <LogOut size={16} />
-        退出登录
+        Log out
       </button>
 
       <ExpenseInputSheet open={sheetOpen} onClose={() => setSheetOpen(false)} />

@@ -13,10 +13,10 @@ import { currentFinanceUser } from '@/mocks/financeData'
 import { cn } from '@/lib/cn'
 
 const MENU = [
-  { to: '/finance/overview', label: '风险总览', icon: GaugeCircle },
-  { to: '/finance/risk-list', label: '高风险骑手列表', icon: ShieldAlert },
-  { to: '/finance/interventions', label: '干预追踪', icon: Target },
-  { to: '/finance/credit-profile', label: '信用画像', icon: TrendingUp },
+  { to: '/finance/overview', label: 'Risk Overview', icon: GaugeCircle },
+  { to: '/finance/risk-list', label: 'High-Risk Riders', icon: ShieldAlert },
+  { to: '/finance/interventions', label: 'Interventions', icon: Target },
+  { to: '/finance/credit-profile', label: 'Credit Profile', icon: TrendingUp },
 ]
 
 export default function FinanceLayout() {
@@ -30,7 +30,7 @@ export default function FinanceLayout() {
           </span>
           <div>
             <p className="text-sm font-bold leading-tight">RiderOS</p>
-            <p className="text-[11px] text-neutral-500">风控工作台</p>
+            <p className="text-[11px] text-neutral-500">Risk Console</p>
           </div>
         </div>
 
@@ -63,7 +63,7 @@ export default function FinanceLayout() {
             }
           >
             <Settings size={18} />
-            设置
+            Settings
           </NavLink>
         </nav>
       </aside>
@@ -81,7 +81,7 @@ export default function FinanceLayout() {
               className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-500"
             />
             <input
-              placeholder="搜索骑手 ID / 姓名"
+              placeholder="Search rider ID / name"
               className="w-full rounded-btn border border-neutral-200 bg-canvas py-2 pl-9 pr-3 text-sm outline-none focus:border-info"
             />
           </div>

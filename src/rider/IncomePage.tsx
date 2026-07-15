@@ -17,9 +17,9 @@ import AIInsightCard from '@/components/rider/AIInsightCard'
 
 type Range = 'today' | 'week' | 'month'
 const RANGES: { key: Range; label: string }[] = [
-  { key: 'today', label: '今日' },
-  { key: 'week', label: '本周' },
-  { key: 'month', label: '本月' },
+  { key: 'today', label: 'Today' },
+  { key: 'week', label: 'Week' },
+  { key: 'month', label: 'Month' },
 ]
 
 const PIE_COLORS = ['#10B981', '#3B82F6', '#F59E0B', '#FB923C', '#6B7280']
@@ -35,7 +35,7 @@ export default function IncomePage() {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-lg font-bold">净收入 · {data.name}</h1>
+      <h1 className="text-lg font-bold">Net income · {data.name}</h1>
 
       <div className="flex rounded-btn bg-neutral-200/60 p-1">
         {RANGES.map((r) => (
@@ -53,7 +53,7 @@ export default function IncomePage() {
       </div>
 
       <section className="rounded-card bg-white p-5 shadow-card">
-        <p className="text-sm text-neutral-500">当前净收入</p>
+        <p className="text-sm text-neutral-500">Current net income</p>
         <p className="num-big mt-1 text-[40px] leading-none text-neutral-900">
           {fmt(summary.net)}
         </p>
@@ -68,21 +68,21 @@ export default function IncomePage() {
               {delta >= 0 ? <ArrowUpRight size={14} /> : <ArrowDownRight size={14} />}
               {fmt(Math.abs(delta))}
             </p>
-            <p className="text-[11px] text-neutral-500">同期对比</p>
+            <p className="text-[11px] text-neutral-500">vs prior period</p>
           </div>
           <div>
             <p className="text-sm font-semibold text-neutral-900">{targetPct}%</p>
-            <p className="text-[11px] text-neutral-500">目标完成度</p>
+            <p className="text-[11px] text-neutral-500">Target progress</p>
           </div>
           <div>
             <p className="text-sm font-semibold text-neutral-900">{fmt(summary.best)}</p>
-            <p className="text-[11px] text-neutral-500">历史最佳</p>
+            <p className="text-[11px] text-neutral-500">All-time best</p>
           </div>
         </div>
       </section>
 
       <section className="rounded-card bg-white p-4 shadow-card">
-        <p className="mb-2 text-sm font-bold">收支趋势</p>
+        <p className="mb-2 text-sm font-bold">Income & expense trend</p>
         <ResponsiveContainer width="100%" height={160}>
           <AreaChart data={trend} margin={{ top: 5, right: 5, left: 5, bottom: 0 }}>
             <defs>
@@ -108,7 +108,7 @@ export default function IncomePage() {
             <Area
               type="monotone"
               dataKey="income"
-              name="收入"
+              name="Income"
               stroke="#10B981"
               strokeWidth={2}
               fill="url(#inc)"
@@ -116,7 +116,7 @@ export default function IncomePage() {
             <Area
               type="monotone"
               dataKey="expense"
-              name="支出"
+              name="Expense"
               stroke="#EF4444"
               strokeWidth={2}
               fill="url(#exp)"
@@ -127,7 +127,7 @@ export default function IncomePage() {
 
       <section className="grid grid-cols-2 gap-3">
         <div className="rounded-card bg-white p-3 shadow-card">
-          <p className="mb-1 text-xs font-bold">收入来源</p>
+          <p className="mb-1 text-xs font-bold">Income sources</p>
           <ResponsiveContainer width="100%" height={110}>
             <PieChart>
               <Pie
@@ -146,7 +146,7 @@ export default function IncomePage() {
           </ResponsiveContainer>
         </div>
         <div className="rounded-card bg-white p-3 shadow-card">
-          <p className="mb-1 text-xs font-bold">支出分类</p>
+          <p className="mb-1 text-xs font-bold">Expense mix</p>
           <ResponsiveContainer width="100%" height={110}>
             <PieChart>
               <Pie
@@ -167,13 +167,13 @@ export default function IncomePage() {
       </section>
 
       <section className="rounded-card bg-white p-4 shadow-card">
-        <p className="mb-2 text-sm font-bold">交易明细</p>
+        <p className="mb-2 text-sm font-bold">Transactions</p>
         <ul className="divide-y divide-neutral-200">
           {data.incomeRecords.map((r) => (
             <li key={r.recordId} className="flex items-center justify-between py-2.5">
               <div>
                 <p className="text-sm font-medium">
-                  {r.type === 'order' ? r.platform : `支出 · ${r.note ?? ''}`}
+                  {r.type === 'order' ? r.platform : `Expense · ${r.note ?? ''}`}
                 </p>
                 <p className="text-[11px] text-neutral-500">
                   {new Date(r.timestamp).toLocaleTimeString('en-GB', {

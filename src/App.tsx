@@ -45,9 +45,9 @@ export default function App() {
           <Route path="interventions" element={<InterventionsPage />} />
           <Route
             path="credit-profile"
-            element={<PlaceholderPage title="信用画像与升级车贷" />}
+            element={<PlaceholderPage title="Credit Profile & Upgrade Loans" />}
           />
-          <Route path="settings" element={<PlaceholderPage title="设置" />} />
+          <Route path="settings" element={<PlaceholderPage title="Settings" />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/rider/home" replace />} />
