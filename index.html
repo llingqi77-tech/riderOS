@@ -13,6 +13,56 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- #region agent log -->
+    <script>
+      (function () {
+        var endpoint = 'http://127.0.0.1:7332/ingest/2be7ef98-f9d3-4c84-b2ba-a0293b42ac74';
+        var sid = 'fbf98b';
+        function send(hypothesisId, message, data) {
+          fetch(endpoint, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Debug-Session-Id': sid,
+            },
+            body: JSON.stringify({
+              sessionId: sid,
+              runId: 'pages-blank',
+              hypothesisId: hypothesisId,
+              location: 'index.html:inline',
+              message: message,
+              data: data,
+              timestamp: Date.now(),
+            }),
+          }).catch(function () {});
+        }
+        var scripts = Array.prototype.map.call(
+          document.scripts,
+          function (s) { return s.src || s.getAttribute('src'); },
+        );
+        send('A', 'page-boot', {
+          href: location.href,
+          pathname: location.pathname,
+          scripts: scripts,
+          hasBuiltAsset: scripts.some(function (s) {
+            return s && s.indexOf('/riderOS/assets/') !== -1;
+          }),
+          hasDevEntry: scripts.some(function (s) {
+            return s && s.indexOf('/src/main.tsx') !== -1;
+          }),
+        });
+        ;['/src/main.tsx', '/riderOS/src/main.tsx', '/riderOS/assets/index-xyfPrLD3.js'].forEach(function (url) {
+          fetch(url, { method: 'HEAD', cache: 'no-store' })
+            .then(function (r) {
+              send('B', 'resource-probe', { url: url, status: r.status, ok: r.ok });
+            })
+            .catch(function (e) {
+              send('B', 'resource-probe-error', { url: url, error: String(e) });
+            });
+        });
+      })();
+    </script>
+    <!-- #endregion -->
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
