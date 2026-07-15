@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   Bar,
@@ -15,20 +15,23 @@ import {
   YAxis,
 } from 'recharts'
 import {
-  conversionTrend,
-  overviewKpis,
-  riskReasonDistribution,
-  riskTrend30d,
+  getOverviewByRange,
+  type OverviewRange,
 } from '@/mocks/financeData'
 import KpiCard from '@/components/finance/KpiCard'
 import { cn } from '@/lib/cn'
 
 const PIE_COLORS = ['#EF4444', '#FB923C', '#F59E0B', '#3B82F6', '#6B7280']
-const RANGES = [30, 60, 90]
+const RANGES: OverviewRange[] = [30, 60, 90]
 
 export default function OverviewPage() {
   const navigate = useNavigate()
-  const [range, setRange] = useState(30)
+  const [range, setRange] = useState<OverviewRange>(30)
+
+  const { kpis, riskTrend, riskReasons, conversionTrend } = useMemo(
+    () => getOverviewByRange(range),
+    [range],
+  )
 
   return (
     <div>
@@ -36,7 +39,7 @@ export default function OverviewPage() {
         <div>
           <h1 className="text-2xl font-bold">风险总览</h1>
           <p className="mt-1 text-sm text-neutral-500">
-            每日 9:00 自动跑批 · 数据更新于 5 分钟前
+            每日 9:00 自动跑批 · 当前查看近 {range} 天数据
           </p>
         </div>
         <div className="flex rounded-btn border border-neutral-200 bg-white p-1">
@@ -55,12 +58,11 @@ export default function OverviewPage() {
         </div>
       </div>
 
-      {/* KPI row */}
       <div className="mb-6 grid grid-cols-4 gap-4">
-        {overviewKpis.map((k) => (
+        {kpis.map((k) => (
           <KpiCard
             key={k.key}
-            label={k.label}
+            label={`${k.label}（${range} 天）`}
             value={k.value}
             delta={k.delta}
             positive={k.trend === 'up'}
@@ -69,13 +71,18 @@ export default function OverviewPage() {
         ))}
       </div>
 
-      {/* Trend + Pie */}
       <div className="mb-6 grid grid-cols-3 gap-4">
         <section className="col-span-2 rounded-card bg-white p-5 shadow-card">
           <p className="mb-4 text-base font-bold">风险人数趋势（{range} 天）</p>
           <ResponsiveContainer width="100%" height={280}>
-            <LineChart data={riskTrend30d}>
-              <XAxis dataKey="label" tick={{ fontSize: 11, fill: '#6B7280' }} axisLine={false} tickLine={false} />
+            <LineChart data={riskTrend}>
+              <XAxis
+                dataKey="label"
+                tick={{ fontSize: 11, fill: '#6B7280' }}
+                axisLine={false}
+                tickLine={false}
+                interval={range === 30 ? 4 : range === 60 ? 9 : 14}
+              />
               <YAxis tick={{ fontSize: 11, fill: '#6B7280' }} axisLine={false} tickLine={false} width={32} />
               <Tooltip contentStyle={{ fontSize: 12, borderRadius: 8 }} />
               <Legend wrapperStyle={{ fontSize: 12 }} />
@@ -88,11 +95,11 @@ export default function OverviewPage() {
         </section>
 
         <section className="rounded-card bg-white p-5 shadow-card">
-          <p className="mb-4 text-base font-bold">风险原因分布</p>
+          <p className="mb-4 text-base font-bold">风险原因分布（{range} 天）</p>
           <ResponsiveContainer width="100%" height={220}>
             <PieChart>
               <Pie
-                data={riskReasonDistribution}
+                data={riskReasons}
                 dataKey="value"
                 nameKey="name"
                 innerRadius={50}
@@ -100,7 +107,7 @@ export default function OverviewPage() {
                 paddingAngle={2}
                 onClick={() => navigate('/finance/risk-list')}
               >
-                {riskReasonDistribution.map((_, i) => (
+                {riskReasons.map((_, i) => (
                   <Cell key={i} fill={PIE_COLORS[i % PIE_COLORS.length]} cursor="pointer" />
                 ))}
               </Pie>
@@ -108,7 +115,7 @@ export default function OverviewPage() {
             </PieChart>
           </ResponsiveContainer>
           <div className="mt-2 space-y-1">
-            {riskReasonDistribution.map((r, i) => (
+            {riskReasons.map((r, i) => (
               <div key={r.name} className="flex items-center justify-between text-xs">
                 <span className="flex items-center gap-1.5">
                   <span className="h-2 w-2 rounded-full" style={{ backgroundColor: PIE_COLORS[i] }} />
@@ -121,9 +128,10 @@ export default function OverviewPage() {
         </section>
       </div>
 
-      {/* Conversion */}
       <section className="rounded-card bg-white p-5 shadow-card">
-        <p className="mb-4 text-base font-bold">干预效果趋势（转化率 & ROI）</p>
+        <p className="mb-4 text-base font-bold">
+          干预效果趋势（近 {conversionTrend.length} 周 · 转化率 & ROI）
+        </p>
         <ResponsiveContainer width="100%" height={220}>
           <ComposedChart data={conversionTrend}>
             <XAxis dataKey="label" tick={{ fontSize: 11, fill: '#6B7280' }} axisLine={false} tickLine={false} />

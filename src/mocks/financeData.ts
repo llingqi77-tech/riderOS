@@ -132,35 +132,104 @@ export function buildRiderDetail(rider: Rider) {
   }
 }
 
-// F-B1 风险总览
-export const overviewKpis = [
-  { key: 'active', label: '在贷骑手数', value: 1284, delta: '+42', trend: 'up' },
-  { key: 'newHigh', label: '本月新增高风险', value: 37, delta: '+8', trend: 'down' },
-  { key: 'predicted', label: '30 天预测新增逾期', value: 21, delta: '-5', trend: 'up' },
-  { key: 'conversion', label: '干预后转化率', value: '68%', delta: '+6%', trend: 'up' },
-]
+// F-B1 风险总览（按时间范围分套数据）
+export type OverviewRange = 30 | 60 | 90
 
-export const riskTrend30d = Array.from({ length: 30 }).map((_, d) => ({
-  label: `${d + 1}`,
-  green: Math.round(900 + rand(d + 1) * 60),
-  yellow: Math.round(220 + rand(d + 7) * 40),
-  orange: Math.round(90 + rand(d + 13) * 30),
-  red: Math.round(30 + rand(d + 21) * 20),
-}))
+function buildRiskTrend(days: number, seedOffset = 0) {
+  return Array.from({ length: days }).map((_, d) => ({
+    label: `${d + 1}`,
+    green: Math.round(880 + rand(d + 1 + seedOffset) * 80 + days * 0.4),
+    yellow: Math.round(200 + rand(d + 7 + seedOffset) * 50 + days * 0.15),
+    orange: Math.round(80 + rand(d + 13 + seedOffset) * 40 + days * 0.1),
+    red: Math.round(25 + rand(d + 21 + seedOffset) * 30 + days * 0.08),
+  }))
+}
 
-export const riskReasonDistribution = [
-  { name: '收入下降', value: 34 },
-  { name: '在线骤减', value: 22 },
-  { name: '缓冲不足', value: 18 },
-  { name: '历史逾期', value: 14 },
-  { name: '维修成本', value: 12 },
-]
+function buildConversionTrend(weeks: number, seedOffset = 0) {
+  return Array.from({ length: weeks }).map((_, w) => ({
+    label: `W${w + 1}`,
+    rate: Math.round(48 + rand(w + 3 + seedOffset) * 30 + weeks * 0.3),
+    roi: +(1.8 + rand(w + 9 + seedOffset) * 2.8).toFixed(1),
+  }))
+}
 
-export const conversionTrend = Array.from({ length: 12 }).map((_, w) => ({
-  label: `W${w + 1}`,
-  rate: Math.round(52 + rand(w + 3) * 26),
-  roi: +(2.1 + rand(w + 9) * 2.4).toFixed(1),
-}))
+const overviewByRange: Record<
+  OverviewRange,
+  {
+    kpis: {
+      key: string
+      label: string
+      value: string | number
+      delta: string
+      trend: 'up' | 'down'
+    }[]
+    riskTrend: ReturnType<typeof buildRiskTrend>
+    riskReasons: { name: string; value: number }[]
+    conversionTrend: ReturnType<typeof buildConversionTrend>
+  }
+> = {
+  30: {
+    kpis: [
+      { key: 'active', label: '在贷骑手数', value: 1284, delta: '+42', trend: 'up' },
+      { key: 'newHigh', label: '新增高风险', value: 37, delta: '+8', trend: 'down' },
+      { key: 'predicted', label: '预测新增逾期', value: 21, delta: '-5', trend: 'up' },
+      { key: 'conversion', label: '干预后转化率', value: '68%', delta: '+6%', trend: 'up' },
+    ],
+    riskTrend: buildRiskTrend(30, 0),
+    riskReasons: [
+      { name: '收入下降', value: 34 },
+      { name: '在线骤减', value: 22 },
+      { name: '缓冲不足', value: 18 },
+      { name: '历史逾期', value: 14 },
+      { name: '维修成本', value: 12 },
+    ],
+    conversionTrend: buildConversionTrend(4, 0),
+  },
+  60: {
+    kpis: [
+      { key: 'active', label: '在贷骑手数', value: 1356, delta: '+98', trend: 'up' },
+      { key: 'newHigh', label: '新增高风险', value: 71, delta: '+15', trend: 'down' },
+      { key: 'predicted', label: '预测新增逾期', value: 48, delta: '-9', trend: 'up' },
+      { key: 'conversion', label: '干预后转化率', value: '64%', delta: '+3%', trend: 'up' },
+    ],
+    riskTrend: buildRiskTrend(60, 100),
+    riskReasons: [
+      { name: '收入下降', value: 28 },
+      { name: '在线骤减', value: 26 },
+      { name: '缓冲不足', value: 20 },
+      { name: '历史逾期', value: 16 },
+      { name: '维修成本', value: 10 },
+    ],
+    conversionTrend: buildConversionTrend(8, 20),
+  },
+  90: {
+    kpis: [
+      { key: 'active', label: '在贷骑手数', value: 1420, delta: '+162', trend: 'up' },
+      { key: 'newHigh', label: '新增高风险', value: 112, delta: '+22', trend: 'down' },
+      { key: 'predicted', label: '预测新增逾期', value: 79, delta: '-12', trend: 'up' },
+      { key: 'conversion', label: '干预后转化率', value: '61%', delta: '+1%', trend: 'up' },
+    ],
+    riskTrend: buildRiskTrend(90, 200),
+    riskReasons: [
+      { name: '收入下降', value: 30 },
+      { name: '在线骤减', value: 19 },
+      { name: '缓冲不足', value: 24 },
+      { name: '历史逾期', value: 17 },
+      { name: '维修成本', value: 10 },
+    ],
+    conversionTrend: buildConversionTrend(12, 40),
+  },
+}
+
+export function getOverviewByRange(range: OverviewRange) {
+  return overviewByRange[range]
+}
+
+/** @deprecated use getOverviewByRange(30) */
+export const overviewKpis = overviewByRange[30].kpis
+export const riskTrend30d = overviewByRange[30].riskTrend
+export const riskReasonDistribution = overviewByRange[30].riskReasons
+export const conversionTrend = overviewByRange[30].conversionTrend
 
 // F-B6 干预记录
 export const interventions: Intervention[] = riders.slice(0, 12).map((r, i) => {
