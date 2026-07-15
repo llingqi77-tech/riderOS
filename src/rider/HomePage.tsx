@@ -42,7 +42,7 @@ export default function HomePage() {
     <div className="space-y-4">
       <section className="hero-lavender">
         <p className="text-sm text-[rgba(41,41,41,0.8)]">Today&apos;s net income · {data.name}</p>
-        <p className="num-big mt-1 text-[44px] leading-none">{fmt(net)}</p>
+        <p className="num-big mt-1 text-[44px] leading-none text-[rgba(41,41,41,1)]">{fmt(net)}</p>
         <div className="mt-3 flex items-center justify-between text-xs text-white/85">
           <span>Target {fmt(todaySnapshot.todayTarget)}</span>
           <span>{Math.round(progress * 100)}% complete</span>
